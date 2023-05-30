@@ -11,7 +11,7 @@ to run the app.
 ### Environment varaibles
 
 Frontend
-- VITE_BASE_URL: localhost or url of site hosted (include http/https)
+- VITE_BASE_URL: localhost or url of site hosted (include http/https) appended with (/api)
 
 Backend
 - DATABASE_URL: postgres url

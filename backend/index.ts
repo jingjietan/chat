@@ -68,13 +68,13 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.static(path.join(__dirname, 'dist')))
 
-app.get(/(sign)|(\d)/, (req, res) => {
+app.get(/^(?!\/api).+/, (req, res) => {
   res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
-app.use("/", loginRouter);
+app.use("/api/", loginRouter);
 
-app.use("/v", postRouter);
+app.use("/api/v", postRouter);
 
 initDB();
 
