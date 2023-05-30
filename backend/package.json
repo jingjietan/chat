@@ -6,7 +6,7 @@
    "scripts": {
       "start": "tsx index.ts",
       "dev": "tsx watch index.ts --clear-screen=false",
-      "test": "echo \"Error: no test specified\" && exit 1",
+      "build": "cd ../frontend && pnpm run build && cp -r ./dist ../backend/dist",
       "migrate": "knex migrate:latest"
    },
    "keywords": [],

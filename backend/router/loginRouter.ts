@@ -8,16 +8,16 @@ import User from "../model/User.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  const users = await User.query().select("name", "email", "id");
-  res.json(users);
-});
+// router.get("/", async (req, res) => {
+//   const users = await User.query().select("name", "email", "id");
+//   res.json(users);
+// });
 
 router.get("/user", protect, async (req, res) => {
   if (!req.user?.id) {
     return res.sendStatus(400);
   }
-  const result = await User.query().findById(req.user?.id);
+  const result = await User.query().select("name", "email", "id").findById(req.user?.id);
   const user = {
     name: result?.name,
     email: result?.email,

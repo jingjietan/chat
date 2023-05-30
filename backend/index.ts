@@ -1,3 +1,4 @@
+import path from "path"
 import chalk from "chalk";
 import express from "express";
 import session from "express-session";
@@ -65,6 +66,7 @@ app.use(passport.session());
 
 const PORT = process.env.PORT || 3001;
 
+app.use("/", express.static(path.join(__dirname, 'dist')))
 app.use("/", loginRouter);
 
 app.use("/v", postRouter);
