@@ -15,6 +15,11 @@ router.get("/", async (req, res) => {
       author: true
     }
   })
+  .modifiers({
+    selectNonSensitive(builder) {
+      builder.select("id", "name")
+    }
+  })
   res.json(posts);
 });
 
