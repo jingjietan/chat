@@ -10,30 +10,30 @@ export const getPosts = () => {
 
 export const addPost = (obj: PostInputs) => {
   return axios
-    .post<never>("/", obj, { withCredentials: true })
+    .post<never>(`${baseUrl}`, obj, { withCredentials: true })
     .then((r) => r.data);
 };
 
 export const addComment = (id: string) => (obj: CommentInputs) => {
   return axios
-    .post(`/${id}/c`, obj, { withCredentials: true })
+    .post(`${baseUrl}/${id}/c`, obj, { withCredentials: true })
     .then((r) => r.data);
 };
 
 export const deletePost = (id: string) => {
   return axios
-    .delete(`/${id}`, { withCredentials: true })
+    .delete(`${baseUrl}/${id}`, { withCredentials: true })
     .then((r) => r.data);
 };
 
 export const deleteComment = ({postId, commentId}: {postId: string, commentId: string}) => {
   return axios
-    .delete(`$/${postId}/c/${commentId}`, { withCredentials: true })
+    .delete(`$${baseUrl}/${postId}/c/${commentId}`, { withCredentials: true })
     .then((r) => r.data);
 };
 
 export const updatePost = ({id, content}: {id: string, content: string}) => {
   return axios
-    .put(`/${id}`, { content }, { withCredentials: true})
+    .put(`${baseUrl}/${id}`, { content }, { withCredentials: true})
     .then(r => r.data)
 }
