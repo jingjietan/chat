@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { useEffect, useState } from "react";
 import { LoginInputs } from "./types";
 
@@ -8,19 +9,21 @@ interface User {
   name: string;
 }
 
+const baseUrl = import.meta.env.VITE_BASE_URL
+
 const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/user", { withCredentials: true })
+      .get(`${baseUrl}/user`, { withCredentials: true })
       .then((r) => r.data)
       .then(setUser)
       .catch(() => console.log("No session"));
   }, []);
 
   const signin = async (data: LoginInputs) => {
-    const user = await axios.post<User>("http://localhost:3001/login", data, {
+    const user = await axios.post<User>(`${baseUrl}/login`, data, {
       withCredentials: true,
     });
     setUser(user.data);
@@ -28,7 +31,7 @@ const useAuth = () => {
 
   const signout = async () => {
     // Signout doesnt work?
-    await axios.post("http://localhost:3001/logout");
+    await axios.post(`${baseUrl}/logout`);
     setUser(null);
   };
 

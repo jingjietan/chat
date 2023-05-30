@@ -10,11 +10,7 @@ import Comment from "../model/Comment.js";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const posts = await Post.query().withGraphFetched({
-    comments: {
-      author: true
-    }
-  })
+  const posts = await Post.query().withGraphFetched('comments.author(selectNonSensitive)')
   .modifiers({
     selectNonSensitive(builder) {
       builder.select("id", "name")

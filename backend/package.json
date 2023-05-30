@@ -6,7 +6,7 @@
    "scripts": {
       "start": "tsx index.ts",
       "dev": "tsx watch index.ts --clear-screen=false",
-      "build:frontend": "cd ../frontend && pnpm run build && cp -r ./dist ../backend/dist",
+      "build:frontend": "rm -rf dist && cd ../frontend && pnpm run build && cp -r ./dist ../backend/dist",
       "migrate": "knex migrate:latest"
    },
    "keywords": [],
