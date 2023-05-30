@@ -52,7 +52,7 @@ app.use(
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:4173"],
+    origin: ["http://localhost:5173", "http://localhost:4173", process.env.BASE_URL || ''],
     credentials: true,
     exposedHeaders: ["set-cookie"],
   })
@@ -66,7 +66,12 @@ app.use(passport.session());
 
 const PORT = process.env.PORT || 3001;
 
-app.use("/", express.static(path.join(__dirname, 'dist')))
+app.use(express.static(path.join(__dirname, 'dist')))
+
+app.get(/(sign)|(\d)/, (req, res) => {
+  res.sendFile(path.join(__dirname + '/dist/index.html'));
+});
+
 app.use("/", loginRouter);
 
 app.use("/v", postRouter);
